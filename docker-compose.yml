@@ -1,0 +1,32 @@
+version: '3.3'
+
+services:
+  db:
+    container_name: cont_db  
+    image: mysql:5.7   
+    privileged: true
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./restore/bd.sql:/restore/bd.sql:rw  
+      - ./restore/my.cnf:/etc/my.cnf:rw  
+    networks:
+      - netw       
+
+  app:
+    container_name: cont_app
+    build:
+        context: ./app
+    image: imgpyapp:0.1
+    depends_on:
+      - db
+    networks:
+      - netw      
+networks:
+     netw: 
+          driver: bridge

@@ -1,0 +1,8 @@
+FROM python:3-alpine
+MAINTAINER kdetony
+RUN apk update &&\
+    apk add python3 py3-pip mysql mysql-client iputils
+RUN pip3 install pymysql
+WORKDIR /app
+ADD app.py .
+CMD ["python3", "/app/app.py"]
