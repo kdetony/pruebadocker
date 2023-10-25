@@ -6,13 +6,13 @@ jobs:
 	runs-on: ubuntu-latest
 	steps:
   	- name: Deploy app python and database
-    	uses: appleboy/ssh-action@v0.1.2
-    	with:
-      	host: ${{secrets.SSH_HOST}}
-      	key: ${{secrets.SSH_KEY}}
-      	username: ${{secrets.SSH_USERNAME}}
+    	  uses: appleboy/ssh-action@v0.1.2
+    	  with:
+        	host: ${{secrets.SSH_HOST}}
+      	        key: ${{secrets.SSH_KEY}}
+         	username: ${{secrets.SSH_USERNAME}}
 
-      	script: |
+      	 script: |
           	git clone https://github.com/kdetony/myappdocker.git
           	cd  myappdocker
           	docker-compose up -d
